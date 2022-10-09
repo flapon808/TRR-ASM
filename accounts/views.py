@@ -44,7 +44,7 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
-				return redirect('home')
+				return render(request, 'accounts/dashboard.html')
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
@@ -54,6 +54,18 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('home')
+
+@login_required(login_url= 'dashboard')
+def dashboard(request):
+	return render(request,'accounts/dashboard.html')
+
+@login_required(login_url='profile')
+def profile(request):
+	return render(request,'accounts/profile.html')
+
+@login_required(login_url='editprofile')
+def editprofile(request):
+	return render(request,'accounts/editprofile.html')
 
 
 # @login_required(login_url='login')
