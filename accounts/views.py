@@ -34,7 +34,7 @@ def registerPage(request):
 
 def loginPage(request):
 	if request.user.is_authenticated:
-		return redirect('home')
+		return redirect('dashboard')
 	else:
 		if request.method == 'POST':
 			username = request.POST.get('username')
@@ -44,12 +44,12 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
-				return render(request, 'accounts/dashboard.html')
+				return redirect('dashboard')
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
-		context = {}
-		return render(request, 'accounts/login.html', context)
+		
+		return render(request, 'accounts/login.html')
 
 def logoutUser(request):
 	logout(request)
