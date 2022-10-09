@@ -107,29 +107,13 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                      <a class="btn btn-info " target="__blank" href="editprofile.html">Edit</a>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="row gutters-sm">
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Activity 1</i> </h6>
 
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Activity 2</i></h6>
-
-                  </div>
-                </div>
-              </div>
 
 
 
@@ -138,6 +122,49 @@
 
         </div>
     </div>
+
+    <br>
+
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-Blacke  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Visited Restaurants</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{visited_restaurants}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-Black  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Restaurant Reviews</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{restaurant_reviews}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-black  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Favorite Restaurants</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{favorite_restaurants}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <style type="text/css">
 body{

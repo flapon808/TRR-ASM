@@ -1,68 +1,708 @@
-{%  extends 'accounts/main.html' %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+<head>
 
-{%  include 'accounts/status.html' %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<br>
+    <title>Restaurant Review</title>
 
-<div class="row">
-	<div class="col-md-5">
-		<h5>CUSTOMERS:</h5>
-		<hr>
-		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
-			<table class="table table-sm">
-				<tr>
-					<th></th>
-					<th>Customer</th>
-					<th>Phone</th>
-				</tr>
+    -->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 
-				{% for customer in customers %}
-					<tr>
-						<td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
-						<td>{{customer.name}}</td>
-						<td>{{customer.phone}}</td>
-					</tr>
-				{% endfor %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
 
-			</table>
-		</div>
-	</div>
+    <link rel="stylesheet" href="{% static 'css/restaurant_review.css' %}">
 
-	<div class="col-md-7">
-		<h5>LAST 5 ORDERS</h5>
-		<hr>
-		<div class="card card-body">
-			
-			<table class="table table-sm">
-				<tr>
-					<th>Product</th>
-					<th>Date Orderd</th>
-					<th>Status</th>
-					<th>Update</th>
-					<th>Remove</th>
-				</tr>
+    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}">
 
-				{% for order in orders %}
-					<tr>
-						<td>{{order.product}}</td>
-						<td>{{order.date_created}}</td>
-						<td>{{order.status}}</td>
-						<td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
 
-						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+</head>
 
-					</tr>
-				{% endfor %}
+<body>
 
-		
-			</table>
-		</div>
-	</div>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
 
-</div>
 
-{% endblock %}
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="{% static 'images/LogoTRR.png'%}" align="klassy cafe html template">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                            
+                            <li class="scroll-to-section"><a href="#review">Reviews</a></li>
 
+                            <li class="submenu">
+                                <a href="javascript:;">Features</a>
+                                <ul>
+                                    <li><a href="#">Restaurant Reviews</a></li>
+                                    <li><a href="#">Weeklty Offers</a></li>
+                                    <li><a href="#">Nearby Restarunt</a></li>
+                                    <li><a href="#">Features Page 4</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li>
+
+                            <li class="scroll-to-section"><a href="profile.html">Profile</a></li>
+
+                            <li> 
+                                <span class="hello-msg">Hello, {{request.user}}</span>
+                                <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+                            </li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Review</span>
+                        </a>
+                        
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="left-content">
+                        <div class="inner-content">
+                            <h4>The Restaurant Review</h4>
+                            <h6>For THE BEST EXPERIENCE</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="main-banner header-text">
+                        <div class="Modern-Slider">
+                            <!-- Item -->
+                            <div class="item">
+                                <div class="img-fill">
+                                    <img src="{% static 'images/slide-01.jpg' %}" alt="">
+                                </div>
+                            </div>
+                            <!-- // Item -->
+
+                            <!-- Item -->
+                            <div class="item">
+                                <div class="img-fill">
+                                    <img src="{% static 'images/slide-03.jpg' %}" alt="">
+                                </div>
+                            </div>
+                            <!-- // Item -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    
+
+    <!-- ***** Menu Area Starts ***** -->
+    <section class="section" id="review">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="section-heading">
+                        <h6>The Restaurant Review</h6>
+                        <h2>Our selection of reviews with quality tastes</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-item-carousel">
+            <div class="col-lg-12">
+                <div class="owl-menu-item owl-carousel">
+                    <div class="item">
+                        <div class='card card1'>
+                            <div class="review">
+                                <h6>5.00</h6>
+                            </div>
+                            <div class='info'>
+                                <h1 class='title'>Chocolate Cake</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedii do
+                                    eiusmod teme.</p>
+                                <div class="main-text-button">
+                                    <div class="scroll-to-section"><a href="#reservation">Make Reservation <i
+                                                class="fa fa-angle-down"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class='card card2'>
+                            <div class="review">
+                                <h6>5.00</h6>
+                            </div>
+                            <div class='info'>
+                                <h1 class='title'>Klassy Pancake</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedii do
+                                    eiusmod teme.</p>
+                                <div class="main-text-button">
+                                    <div class="scroll-to-section"><a href="#reservation">Make Reservation <i
+                                                class="fa fa-angle-down"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class='card card3'>
+                            <div class="review">
+                                <h6>4.99</h6>
+                            </div>
+                            <div class='info'>
+                                <h1 class='title'>Tall Klassy Bread</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedii do
+                                    eiusmod teme.</p>
+                                <div class="main-text-button">
+                                    <div class="scroll-to-section"><a href="#reservation">Make Reservation <i
+                                                class="fa fa-angle-down"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class='card card4'>
+                            <div class="review">
+                                <h6>4.98</h6>
+                            </div>
+                            <div class='info'>
+                                <h1 class='title'>Blueberry CheeseCake</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedii do
+                                    eiusmod teme.</p>
+                                <div class="main-text-button">
+                                    <div class="scroll-to-section"><a href="#reservation">Make Reservation <i
+                                                class="fa fa-angle-down"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class='card card5'>
+                            <div class="review">
+                                <h6>4.95</h6>
+                            </div>
+                            <div class='info'>
+                                <h1 class='title'>Klassy Cup Cake</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedii do
+                                    eiusmod teme.</p>
+                                <div class="main-text-button">
+                                    <div class="scroll-to-section"><a href="#reservation">Make Reservation <i
+                                                class="fa fa-angle-down"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class='card card3'>
+                            <div class="review">
+                                <h6>4.5</h6>
+                            </div>
+                            <div class='info'>
+                                <h1 class='title'>Klassic Cake</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sedii do
+                                    eiusmod teme.</p>
+                                <div class="main-text-button">
+                                    <div class="scroll-to-section"><a href="#reservation">Make Reservation <i
+                                                class="fa fa-angle-down"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Menu Area Ends ***** -->
+
+
+
+           <!-- ***** Contact Us Area Starts ***** -->
+           <section class="section" id="reservation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 align-self-center">
+                        <div class="left-text-content">
+                            <div class="section-heading">
+                                <h6>Contact Us</h6>
+                                <h2>Here You Can Make A Reservation Or Just walkin to our cafe</h2>
+                            </div>
+                            <p>Donec pretium est orci, non vulputate arcu hendrerit a. Fusce a eleifend riqsie, namei
+                                sollicitudin urna diam, sed commodo purus porta ut.</p>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="phone">
+                                        <i class="fa fa-phone"></i>
+                                        <h4>Phone Numbers</h4>
+                                        <span><a href="#">080-090-0990</a><br><a href="#">080-090-0880</a></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="message">
+                                        <i class="fa fa-envelope"></i>
+                                        <h4>Emails</h4>
+                                        <span><a href="#">19101027@uap-bd.edu</a><br><a href="#">19101031@uap-bd.edu</a><br><a href="#">19101035@uap-bd.edu</a><br><a href="#">info@company.com</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="contact-form">
+                            <form id="contact" action="" method="post">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4>Connect With Us</h4>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12">
+                                        <fieldset>
+                                            <input name="name" type="text" id="name" placeholder="Your Name*" required="">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12">
+                                        <fieldset>
+                                            <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*"
+                                                placeholder="Your Email Address" required="">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12">
+                                        <fieldset>
+                                            <input name="phone" type="text" id="phone" placeholder="Phone Number*"
+                                                required="">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+   
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div id="filterDate2">
+                                            <div class="input-group date" data-date-format="dd/mm/yyyy">
+                                                <input name="date" id="date" type="text" class="form-control"
+                                                    placeholder="dd/mm/yyyy">
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-th"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <fieldset>
+                                            <select value="time" name="time" id="time">
+                                                <option value="time">Time</option>
+                                                <option name="Breakfast" id="Breakfast">Dessert</option>
+                                                <option name="Lunch" id="Lunch">Lunch</option>
+                                                <option name="Dinner" id="Dinner">Fine Dinning</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <fieldset>
+                                            <textarea name="message" rows="6" id="message" placeholder="Message"
+                                                required=""></textarea>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <fieldset>
+                                            <button type="submit" id="form-submit" class="main-button-icon">Make A
+                                                Reservation</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ***** Contact Us Area Ends ***** -->
+
+    <!-- ***** Menu Area Starts ***** -->
+    <section class="section" id="offers">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4 text-center">
+                    <div class="section-heading">
+                        <h6>Weeky Offers</h6>
+                        <h2>This Week’s Special Meal Offers</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <div class="heading-tabs">
+                                <div class="row">
+                                    <div class="col-lg-6 offset-lg-3">
+                                        <ul>
+                                            <li><a href='#tabs-1'><img src="{% static 'images/tab-icon-01.png' %}"
+                                                        alt="">Breakfast</a></li>
+                                            <li><a href='#tabs-2'><img src="{% static 'images/tab-icon-02.png' %}"
+                                                        alt="">Lunch</a></a></li>
+                                            <li><a href='#tabs-3'><img src="{% static 'images/tab-icon-03.png' %}"
+                                                        alt="">Dinner</a></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-01.png' %}" alt="">
+                                                            <h4>Fresh Chicken Salad</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$10.50</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-02.png' %}" alt="">
+                                                            <h4>Orange Juice</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$8.50</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-03.png' %}" alt="">
+                                                            <h4>Fruit Salad</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$9.90</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="right-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-04.png' %}" alt="">
+                                                            <h4>Eggs Omelette</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$6.50</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-05.png' %}" alt="">
+                                                            <h4>Dollma Pire</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$5.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-06.png' %}" alt="">
+                                                            <h4>Omelette & Cheese</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$4.10</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article id='tabs-2'>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">price
+                                                            <img src="{% static 'images/tab-item-04.png' %}" alt="">
+                                                            <h4>Eggs Omelette</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$14</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-05.png' %}" alt="">
+                                                            <h4>Dollma Pire</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$18</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-06.png' %}" alt="">
+                                                            <h4>Omelette & Cheese</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$22</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="right-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-01.png' %}" alt="">
+                                                            <h4>Fresh Chicken Salad</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$10</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-02.png' %}" alt="">
+                                                            <h4>Orange Juice</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$20</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-03.png' %}" alt="">
+                                                            <h4>Fruit Salad</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$30</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article id='tabs-3'>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-05.png' %}" alt="">
+                                                            <h4>Eggs Omelette</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$14</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-03.png' %}" alt="">
+                                                            <h4>Orange Juice</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$18</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-02.png' %}" alt="">
+                                                            <h4>Fruit Salad</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$10</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="right-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-06.png' %}" alt="">
+                                                            <h4>Fresh Chicken Salad</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$8.50</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images//tab-item-01.png' %}" alt="">
+                                                            <h4>Dollma Pire</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$9</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="{% static 'images/tab-item-04.png' %}" alt="">
+                                                            <h4>Omelette & Cheese</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$11</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Chefs Area Ends ***** -->
+
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-xs-12">
+                    <div class="right-text-content">
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="logo">
+                        <a href="index.html"><img src="{% static 'images/ColoredLogo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-12">
+                    <div class="left-text-content">
+                        <p>© Copyright UAP.
+
+                            <br>Design: Svengali
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'js/owl-carousel.js' %}"></script>
+    <script src="{% static 'js/accordions.js' %}"></script>
+    <script src="{% static 'js/datepicker.js' %}"></script>
+    <script src="{% static 'js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imgfix.min.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/lightbox.js' %}"></script>
+    <script src="{% static 'js/isotope.js' %}"></script>
+
+    <!-- Global Init -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+
+        $(function () {
+            var selectedClass = "";
+            $("p").click(function () {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function () {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
+            });
+        });
+
+    </script>
+</body>
+
+</html>
