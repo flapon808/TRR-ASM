@@ -56,7 +56,7 @@ def logoutUser(request):
 	return redirect('home')
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 # def home(request):
 # 	orders = Order.objects.all()
 # 	customers = Customer.objects.all()
@@ -73,64 +73,64 @@ def logoutUser(request):
 
 # 	return render(request, 'accounts/dashboard.html', context)
 
-@login_required(login_url='login')
-def products(request):
-	products = Product.objects.all()
+# @login_required(login_url='login')
+# def products(request):
+# 	products = Product.objects.all()
 
-	return render(request, 'accounts/products.html', {'products':products})
+# 	return render(request, 'accounts/products.html', {'products':products})
 
-@login_required(login_url='login')
-def customer(request, pk_test):
-	customer = Customer.objects.get(id=pk_test)
+# @login_required(login_url='login')
+# def customer(request, pk_test):
+# 	customer = Customer.objects.get(id=pk_test)
 
-	orders = customer.order_set.all()
-	order_count = orders.count()
+# 	orders = customer.order_set.all()
+# 	order_count = orders.count()
 
-	myFilter = OrderFilter(request.GET, queryset=orders)
-	orders = myFilter.qs 
+# 	myFilter = OrderFilter(request.GET, queryset=orders)
+# 	orders = myFilter.qs 
 
-	context = {'customer':customer, 'orders':orders, 'order_count':order_count,
-	'myFilter':myFilter}
-	return render(request, 'accounts/customer.html',context)
+# 	context = {'customer':customer, 'orders':orders, 'order_count':order_count,
+# 	'myFilter':myFilter}
+# 	return render(request, 'accounts/customer.html',context)
 
-@login_required(login_url='login')
-def createOrder(request, pk):
-	OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10 )
-	customer = Customer.objects.get(id=pk)
-	formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
-	#form = OrderForm(initial={'customer':customer})
-	if request.method == 'POST':
-		#print('Printing POST:', request.POST)
-		form = OrderForm(request.POST)
-		formset = OrderFormSet(request.POST, instance=customer)
-		if formset.is_valid():
-			formset.save()
-			return redirect('/')
+# @login_required(login_url='login')
+# def createOrder(request, pk):
+# 	OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10 )
+# 	customer = Customer.objects.get(id=pk)
+# 	formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
+# 	#form = OrderForm(initial={'customer':customer})
+# 	if request.method == 'POST':
+# 		#print('Printing POST:', request.POST)
+# 		form = OrderForm(request.POST)
+# 		formset = OrderFormSet(request.POST, instance=customer)
+# 		if formset.is_valid():
+# 			formset.save()
+# 			return redirect('/')
 
-	context = {'form':formset}
-	return render(request, 'accounts/order_form.html', context)
+# 	context = {'form':formset}
+# 	return render(request, 'accounts/order_form.html', context)
 
-@login_required(login_url='login')
-def updateOrder(request, pk):
+# @login_required(login_url='login')
+# def updateOrder(request, pk):
 
-	order = Order.objects.get(id=pk)
-	form = OrderForm(instance=order)
+# 	order = Order.objects.get(id=pk)
+# 	form = OrderForm(instance=order)
 
-	if request.method == 'POST':
-		form = OrderForm(request.POST, instance=order)
-		if form.is_valid():
-			form.save()
-			return redirect('/')
+# 	if request.method == 'POST':
+# 		form = OrderForm(request.POST, instance=order)
+# 		if form.is_valid():
+# 			form.save()
+# 			return redirect('/')
 
-	context = {'form':form}
-	return render(request, 'accounts/order_form.html', context)
+# 	context = {'form':form}
+# 	return render(request, 'accounts/order_form.html', context)
 
-@login_required(login_url='login')
-def deleteOrder(request, pk):
-	order = Order.objects.get(id=pk)
-	if request.method == "POST":
-		order.delete()
-		return redirect('/')
+# @login_required(login_url='login')
+# def deleteOrder(request, pk):
+# 	order = Order.objects.get(id=pk)
+# 	if request.method == "POST":
+# 		order.delete()
+# 		return redirect('/')
 
-	context = {'item':order}
-	return render(request, 'accounts/delete.html', context)
+# 	context = {'item':order}
+# 	return render(request, 'accounts/delete.html', context)

@@ -9,7 +9,7 @@ urlpatterns = [
 	path('logout/', views.logoutUser, name="logout"),
 
   
-    path('customer/<str:pk_test>/', views.customer, name="customer"),
+    # path('customer/<str:pk_test>/', views.customer, name="customer"),
 
 
 
