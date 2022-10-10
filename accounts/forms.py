@@ -17,4 +17,9 @@ class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
-
+		widgets = {
+            'Name' : forms.TextInput(attrs={'class':'form-control','required':'True', 'placeholder':"Full Name"}),
+            'Email' : forms.EmailInput(attrs={'class':'form-control', 'required':'True'}),
+            'Gender' : forms.Select(attrs={'class':'form-control', 'required':'True'}),
+            'Date_of_Birth' : forms.DateInput(attrs={'class':'form-control', 'type':'date', 'required':'True'}),
+		}

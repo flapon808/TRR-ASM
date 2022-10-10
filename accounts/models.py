@@ -4,11 +4,16 @@ from django.contrib.auth.models import User
 
 class Customer(models.Model):
 	user= models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+	profile_img=models.ImageField(null=True,upload_to='profiles/',blank=True,default="profiles/default.png")
 	name = models.CharField(max_length=200, null=True)
-	phone = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200, null=True)
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
-
+	Date_of_Birth = models.DateField(null=True)
+	GENDER=(
+        	('Male','Male'),
+        	('Female','Female'),
+       		('Other','Other'),
+	)
+	gender = models.CharField(max_length=6, blank=True, null=True, choices= GENDER,)
 	def __str__(self):
 		return self.name
 
@@ -32,11 +37,12 @@ class Restaurant(models.Model):
 			('Coffer House', 'Coffer House'),
 			) 
 	CUISIN = (
-			('Bangladeshi ','Bangladeshi '),
-			('Chinses ','Chinses '),
-			('Indian ','Indian '),
-			('Pakistani ','Pakistani '),
-			('Thai ','Thai '),
+			('Bangladeshi','Bangladeshi'),
+			('Chinses','Chinses'),
+			('Indian','Indian'),
+			('Pakistani','Pakistani'),
+			('Thai','Thai'),
+			('Arabian','Arabian'),
 
 			)
 	name = models.CharField(max_length=200, null=True)
@@ -50,7 +56,3 @@ class Restaurant(models.Model):
 	def __str__(self):
 		return self.name
 
-
-
-
-	

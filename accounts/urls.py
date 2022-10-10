@@ -8,8 +8,8 @@ urlpatterns = [
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
 	path('dashboard/', views.dashboard, name="dashboard"), 
-	path('login/profile.html/', views.profile, name="profile"),
-	path('login/profile.html/editprofile.html/', views.editprofile, name="editprofile"),
+	path('profile', views.profile, name="profile"),
+	path('editprofile', views.editprofile, name="editprofile"),
   
     # path('customer/<str:pk_test>/', views.customer, name="customer"),
 

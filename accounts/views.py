@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
@@ -9,9 +10,13 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.models import Group
+
 # Create your views here.
 from .models import *
 from .forms import  CreateUserForm
+from .decorators import unauthenticated_user, allowed_users, admin_only
+ 
 
 
 def registerPage(request):
@@ -25,12 +30,15 @@ def registerPage(request):
 				form.save()
 				user = form.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
-
+				Customer.objects.create(
+					profile
+				)
 				return redirect('login')
 			
 
 		context = {'form':form}
 		return render(request, 'accounts/register.html', context)
+
 
 def loginPage(request):
 	if request.user.is_authenticated:
@@ -59,7 +67,7 @@ def logoutUser(request):
 def dashboard(request):
 	return render(request,'accounts/dashboard.html')
 
-@login_required(login_url='profile')
+@login_required(login_url='login')
 def profile(request):
 	return render(request,'accounts/profile.html')
 
