@@ -16,7 +16,7 @@ from django import forms
 class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
-		fields = ['username', 'fullname', 'email', 'date_of_birth', 'gender', 'password1', 'password2']
+		fields = ['username', 'email', 'password1', 'password2']
 		widgets = {
             'Name' : forms.TextInput(attrs={'class':'form-control','required':'True', 'placeholder':"Name"}),
 			'Fullname' : forms.TextInput(attrs={'class':'form-control','required':'True', 'placeholder':"Full Name"}),
