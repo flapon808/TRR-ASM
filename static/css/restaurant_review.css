@@ -1667,4 +1667,8 @@ responsive
   100% {
     opacity: 0;
   }
+
+  
 }
+
+th{ border: solid 2px black;}
