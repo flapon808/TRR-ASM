@@ -18,7 +18,7 @@
                         <img src="{{ product.image.url }}" style="height: 300px; width: 200px;"  class="card-img-top" alt="...">
                         <div class="card-body">
                             <h4 style="font-size: 17px;" class="card-title mt-1">{{ product.name }}</h4>
-                            <h3 style="color: rgb(16, 52, 107)" class="card-subtitle mt-1">${{ product.price }}</h3>
+                            <h3 style="color: rgb(16, 52, 107)" class="card-subtitle mt-1">{{ product.price }}</h3>
                             <hr>
                             <p style="font-size: 13px;" class="btn btn-warning"><b>{{ product.category.name }}</b></p>
                             <p style="font-size: 13px;" class="cart-text mt-1">{{ product.created_at }}</p>                
