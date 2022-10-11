@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 class Customer(models.Model):
 	user= models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 	profile_img=models.ImageField(null=True,upload_to='profiles/',blank=True,default="profiles/default.png")
-	name = models.CharField(max_length=200, null=True)
+	fullname = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200, null=True)
-	Date_of_Birth = models.DateField(null=True)
+	date_of_birth = models.DateField(null=True)
 	GENDER=(
         	('Male','Male'),
         	('Female','Female'),
