@@ -5,6 +5,9 @@ def index(request):
 def weekly(request):
     return render(request,"weeklyoffers.html")
 
+def restaurants(request):
+    return render(request,"showproducts.html")
+
 
      
 
