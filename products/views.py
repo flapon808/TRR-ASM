@@ -148,3 +148,6 @@ def delete_comment(request, pk):
     product_id = comment.product.id
     comment.delete()
     return redirect(reverse('product', args=[product_id]))
+
+def dashboard(request):
+    return render(request,"dashboard.html")

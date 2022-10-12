@@ -64,14 +64,14 @@
                                 <ul>
                                     <li><a href="{% url 'restaurants' %}">Restaurant Reviews</a></li>
                                     <li><a href="{% url 'weeklyoffers' %}">Weeklty Offers</a></li>
-                                    <li><a href="#">Nearby Restarunt</a></li>
+                                    <li><a href="https://www.google.com/maps/search/my+nearby+restaurants/@23.7502459,90.4228222,15z/data=!3m1!4b1">My Nearby Restarunt</a></li>
                                     <li><a href="#">Features Page 4</a></li>
                                 </ul>
                             </li>
 
                             <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li>
 
-                            <li class="scroll-to-section"><a href="{% url 'profile' %}">Profile</a></li>
+                            <!-- <li class="scroll-to-section"><a href="{% url 'profile' %}">Profile</a></li> -->
 
                             <li> 
                                 <span class="hello-msg">Hello, {{request.user}}</span>
@@ -136,16 +136,18 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="section-heading">
-                        <h6>{{request.user}}'s Activity</h6>
-                        <h2>My activities...</h2>
+                        <!-- <h6>{{request.user}}'s Activity</h6>
+                        <h2>My activities...</h2> -->
+                        <h6>We offer {{request.user}} some food reviews</h6>
+                        <h2>Our selection of reviews with quality tastes</h2>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="row">
-            <!-- <div class="col">
+        <!-- <div class="row">
+            <div class="col">
                 <div class="col-md">
                     <div class="card text-center text-Blacke  mb-3" style=" border: solid 2px black" id="">
                         <table summary="restaruntReview">
@@ -156,10 +158,10 @@
                             </table> 
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col">
                     <div class="col-md">
                         <div class="card text-center text-Blacke  mb-3" style=" border: solid 2px black " id="">
@@ -172,7 +174,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
             <div class="col">
                 <div class="col-md">
@@ -199,7 +201,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
              
         <div class="menu-item-carousel">
