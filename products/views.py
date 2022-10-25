@@ -12,7 +12,7 @@ from . models import Product, Category, Comment
 from . forms import ProductForm, CommentForm
 
 
-@login_required(login_url='accounts/login')
+# @login_required(login_url='accounts/login')
 def ShowAllProducts(request):
     
     category = request.GET.get('category')
